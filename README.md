@@ -18,8 +18,8 @@
 1. **Клонируйте репозиторий:**
 
    ```bash
-   git clone https://github.com/yourusername/yourrepository.git
-   cd yourrepository
+   git clone https://github.com/asvspb/Pobeda.git
+   cd Pobeda/
    ```
 
 2. **Установите зависимости:**
@@ -35,7 +35,7 @@
 1. **Запустите скрипт:**
 
    ```bash
-   python your_script.py
+   python3 pobeda-s.py
    ```
 
 2. **Следуйте инструкциям на экране:**
@@ -58,7 +58,7 @@
 
 ## Структура проекта
 
-- `your_script.py`: Основной скрипт для поиска билетов.
+- `pobeda-s.py`: Основной скрипт для поиска билетов.
 - `requirements.txt`: Файл с зависимостями.
 - `README.md`: Этот файл.
 
@@ -86,8 +86,8 @@ This project is a Python script that uses Selenium to search for the cheapest fl
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/yourusername/yourrepository.git
-   cd yourrepository
+   git clone https://github.com/asvspb/Pobeda.git
+   cd Pobeda/
    ```
 
 2. **Install the dependencies:**
@@ -103,7 +103,7 @@ This project is a Python script that uses Selenium to search for the cheapest fl
 1. **Run the script:**
 
    ```bash
-   python your_script.py
+   python3 pobeda-s.py
    ```
 
 2. **Follow the on-screen instructions:**
@@ -126,7 +126,7 @@ Date: 02.01.2024, Price: 4500₽, Departure: 11:00, Arrival: 13:00
 
 ## Project Structure
 
-- `your_script.py`: The main script for searching tickets.
+- `pobeda-s.py`: The main script for searching tickets.
 - `requirements.txt`: File with dependencies.
 - `README.md`: This file.
 
@@ -136,4 +136,3 @@ This project is licensed under the MIT License. See the `LICENSE` file for detai
 
 ---
 
-**Note:** Replace `yourusername`, `yourrepository`, and `your_script.py` with your actual GitHub username, repository name, and script name respectively.
