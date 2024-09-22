@@ -118,9 +118,9 @@ This project is a Python script that uses Selenium to search for the cheapest fl
 ## Example Output
 
 ```
-Searching for tickets from Saint Petersburg to Moscow for 5 days ahead...
-Date: 01.01.2024, Price: 5000₽, Departure: 10:00, Arrival: 12:00
-Date: 02.01.2024, Price: 4500₽, Departure: 11:00, Arrival: 13:00
+Идет поиск билетов Санкт-Петербург - Москва на 5 дн. вперед...
+Дата: 01.01.2024, Цена: 5000₽, Вылет: 10:00, Прилет: 12:00
+Дата: 02.01.2024, Цена: 4500₽, Вылет: 11:00, Прилет: 13:00
 ...
 ```
 
