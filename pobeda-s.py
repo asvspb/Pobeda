@@ -10,9 +10,36 @@ import time
 import csv
 
 def get_cheapest_tickets(origin, destination, start_date, days):
+    """
+    Search for the cheapest tickets on the Pobeda website.
+
+    Parameters
+    ----------
+    origin : str
+        The IATA code of the origin city.
+    destination : str
+        The IATA code of the destination city.
+    start_date : datetime
+        The date to start searching from.
+    days : int
+        The number of days to search ahead.
+
+    Returns
+    -------
+    list
+        A list of dictionaries with the following keys:
+            - date: The date of the ticket.
+            - price: The price of the ticket in rubles.
+            - departure_time: The departure time of the ticket.
+            - arrival_time: The arrival time of the ticket.
+    str
+        The name of the origin city.
+    str
+        The name of the destination city.
+    """
     cheapest_tickets = []
 
-    # Настройки для Chrome
+    # Chrome settings
     chrome_options = Options()
     chrome_options.add_argument("--headless")
     chrome_options.add_argument("--disable-gpu")
@@ -32,7 +59,7 @@ def get_cheapest_tickets(origin, destination, start_date, days):
 
         try:
             driver.get(url)
-            # Ждем загрузки элементов с ценами
+            # Wait for price elements to load
             WebDriverWait(driver, 30).until(
                 EC.presence_of_element_located((By.CLASS_NAME, 'price-cell__text'))
             )
@@ -55,7 +82,7 @@ def get_cheapest_tickets(origin, destination, start_date, days):
                     'arrival_time': arrival_time
                 })
 
-                # Выводим информацию о найденном билете
+                # Display information about the found ticket
                 print(f"Дата: {formatted_date}, Цена: {min_price}₽, "
                       f"Вылет: {departure_time}, Прилет: {arrival_time}")
             else:
@@ -70,7 +97,7 @@ def get_cheapest_tickets(origin, destination, start_date, days):
     return cheapest_tickets, origin_city_name, destination_city_name
 
 if __name__ == "__main__":
-    # Города и их коды IATA
+    # Cities and their IATA codes
     cities = {
         '1': {'name': 'Санкт-Петербург', 'code': 'LED'},
         '2': {'name': 'Волгоград', 'code': 'VOG'},
@@ -84,7 +111,7 @@ if __name__ == "__main__":
         '10': {'name': 'Аланья', 'code': 'GZP'}
     }
 
-    # Выбор направления
+    # Choose direction
     print("Доступные города отправления:")
     for key, city in cities.items():
         print(f"{key}. {city['code']} - {city['name']}")
@@ -113,7 +140,7 @@ if __name__ == "__main__":
         print("Город отправления и город назначения не могут совпадать.")
         exit(1)
 
-    # Выбор даты начала поиска
+    # Choose start date for search
     while True:
         start_date_input = input("Введите дату начала поиска (например, 01.01.2024) или нажмите Enter для использования сегодняшней даты: ")
         if start_date_input == "":
@@ -126,7 +153,7 @@ if __name__ == "__main__":
             except ValueError:
                 print("Неверный формат даты. Пожалуйста, используйте формат ДД.ММ.ГГГГ, (например, 01.01.2024)")
 
-    # Выбор количества дней
+    # Choose number of days
     while True:
         try:
             days = int(input("Выберите период поиска (в днях): "))
@@ -139,16 +166,16 @@ if __name__ == "__main__":
 
     tickets, origin_city_name, destination_city_name = get_cheapest_tickets(origin, destination, start_date, days)
 
-    # Находим самый дешевый билет
+    # Find the cheapest ticket
     if tickets:
         cheapest_ticket = min(tickets, key=lambda x: x['price'])
 
-        # Выводим информацию о самом дешевом билете
+        # Display information about the cheapest ticket
         print(f"\nСамый дешевый билет по направлению {origin_city_name} - {destination_city_name} c {start_date.strftime('%d.%m.%Y')} на {days} дн. вперед:")
         print(f"Дата: {cheapest_ticket['date']}, Цена: {cheapest_ticket['price']}₽, "
                 f"Вылет: {cheapest_ticket['departure_time']}, Прилет: {cheapest_ticket['arrival_time']}")
 
-        # Сохраняем все результаты в CSV файл
+        # Save all results to a CSV file
         with open('cheapest_tickets.csv', 'w', newline='', encoding='utf-8') as csvfile:
             fieldnames = ['date', 'price', 'departure_time', 'arrival_time']
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
